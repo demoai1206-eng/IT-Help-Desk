@@ -89,6 +89,7 @@ body { font-family: Arial, sans-serif; }
     <button class="option" onclick="showResponse('access')">System Access</button>
     <button class="option" onclick="showResponse('remote')">Remote Work</button>
     <button class="option" onclick="showResponse('crm')">CRM Support</button>
+    <button class="option" onclick="showResponse('Onbording')">New Onbording</button>
 
     <div id="response"></div>
   </div>
@@ -119,6 +120,8 @@ function showResponse(type) {
   else if (type === 'crm') {
     res.innerHTML = "<div class='bot'>👉 CRM Support:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JACbs_8gmdwVQYuvISpXpOaKAT2opxmPGY_aUgxW66Ad8xI?nav=YWY4ZjRjZjYtYmM2Yy00NzZhLWI4NTMtODMyMmFkNzYyODRk'>Open Form</a></div>";
   }
+    else if (type === 'Onbording') {
+    res.innerHTML = "<div class='bot'>👉 CRM Support:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JABvlV452Ja1SqAt-HFBtInZAd3vRonVLNaYms8kaf5hNWI?nav=MWVjNmI4ZDYtOTFkMi00Mzg3LWExNjMtNzk3YzRjNjVmNGFk'>Open Form</a></div>";
 }
 
 </script>
