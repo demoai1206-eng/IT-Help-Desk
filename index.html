@@ -85,7 +85,7 @@ body { font-family: Arial, sans-serif; }
     <div class="bot">👋 Hello! How can I help you?</div>
 
     <button class="option" onclick="showResponse('issue')">IT Issue</button>
-    <button class="option" onclick="showResponse('hardware')">Hardware Request</button>
+    <button class="option" onclick="showResponse('Service')">Service Request</button>
     <button class="option" onclick="showResponse('access')">System Access</button>
     <button class="option" onclick="showResponse('remote')">Remote Work</button>
     <button class="option" onclick="showResponse('crm')">CRM Support</button>
@@ -110,8 +110,8 @@ function showResponse(type) {
   if (type === 'issue') {
     message = "👉 Submit IT Issue:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JABpGk6MbzNHSqM_mjABd-OMAQmNs32Y0rv4Dh0KMgRMACk?nav=NGJhNWE5NTktOGNlZS00YWFlLTk5ZGItZmZhYWM2YzhjMzhh'>Open Form</a>";
   }
-  else if (type === 'hardware') {
-    message = "👉 Request Hardware:<br><a href='https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u'>Open Form</a>";
+  else if (type === 'Service') {
+    message = "👉 Request service:<br><a href='https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u'>Open Form</a>";
   }
   else if (type === 'access') {
     message = "👉 System Access:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JAAF5-gem2SRRIkaCXoi3c5dAcOjAqpCJp14OtcRQbyfaVU?nav=ZjI0MTE0NjUtYjgxYS00NTdjLWI3MjAtM2E0NTU1ZmQyOGFh'>Open Form</a>";
