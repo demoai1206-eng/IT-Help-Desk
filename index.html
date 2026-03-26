@@ -17,59 +17,44 @@ body { font-family: Arial, sans-serif; }
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
 }
 
-/* Chat Window */
-#chatWindow {
+/* Chat Box */
+#chatBox {
   display: none;
   position: fixed;
   bottom: 90px;
   right: 20px;
   width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
   background: white;
+  border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-  overflow: hidden;
-}
-
-/* Header */
-#chatHeader {
-  background: #0078D4;
-  color: white;
   padding: 10px;
-  font-weight: bold;
 }
 
 /* Messages */
-#chatBody {
-  padding: 10px;
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.bot {
-  background: #f1f1f1;
-  padding: 8px;
-  border-radius: 8px;
-  margin: 5px 0;
-}
+.bot { color: #0078D4; margin: 5px 0; }
+.user { color: green; text-align: right; }
 
 /* Buttons */
 .option {
   display: block;
+  width: 100%;
   margin: 5px 0;
   padding: 8px;
+  border: none;
   background: #0078D4;
   color: white;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .option:hover {
-  background: #005a9e;
+  background: #005ea6;
 }
 
 </style>
@@ -77,57 +62,108 @@ body { font-family: Arial, sans-serif; }
 
 <body>
 
+<!-- Chat Button -->
 <button id="chatBtn" onclick="toggleChat()">💬</button>
 
-<div id="chatWindow">
-  <div id="chatHeader">IT Help Desk</div>
-  <div id="chatBody">
-    <div class="bot">👋 Hello! How can I help you?</div>
-
-    <button class="option" onclick="showResponse('issue')">IT Issue</button>
-    <button class="option" onclick="showResponse('Service')">Service Request</button>
-    <button class="option" onclick="showResponse('access')">System Access</button>
-    <button class="option" onclick="showResponse('remote')">Remote Work</button>
-    <button class="option" onclick="showResponse('crm')">CRM Support</button>
-    <button class="option" onclick="showResponse('onboarding')">New Onboarding</button>
-
-    <div id="response"></div>
-  </div>
+<!-- Chat Window -->
+<div id="chatBox">
+  <div id="messages"></div>
 </div>
 
 <script>
 
+// Toggle Chat
 function toggleChat() {
-  let chat = document.getElementById("chatWindow");
-  chat.style.display = chat.style.display === "block" ? "none" : "block";
+  let box = document.getElementById("chatBox");
+  box.style.display = box.style.display === "none" ? "block" : "none";
+  startBot();
 }
 
-function showResponse(type) {
-  let res = document.getElementById("response");
+// Bot Message
+function addBot(msg) {
+  document.getElementById("messages").innerHTML += "<div class='bot'>" + msg + "</div>";
+}
 
-  let message = "";
+// Start Bot
+function startBot() {
+  document.getElementById("messages").innerHTML = "";
+  
+  addBot("👋 Hello! Welcome to IT Help Desk");
+  addBot("How can I help you?");
 
-  if (type === 'issue') {
-    message = "👉 Submit IT Issue:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JABpGk6MbzNHSqM_mjABd-OMAQmNs32Y0rv4Dh0KMgRMACk?nav=NGJhNWE5NTktOGNlZS00YWFlLTk5ZGItZmZhYWM2YzhjMzhh'>Open Form</a>";
-  }
-  else if (type === 'Service') {
-    message = "👉 Request service:<br><a href='https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u'>Open Form</a>";
-  }
-  else if (type === 'access') {
-    message = "👉 System Access:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JAAF5-gem2SRRIkaCXoi3c5dAcOjAqpCJp14OtcRQbyfaVU?nav=ZjI0MTE0NjUtYjgxYS00NTdjLWI3MjAtM2E0NTU1ZmQyOGFh'>Open Form</a>";
-  }
-  else if (type === 'remote') {
-    message = "👉 Remote Work:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JAByGSLOLmWnTrdPAPEH3uEjAVHG8ppcJFkHsf5g7RVMEK0?nav=MzI3MmZkYmQtNzI2Yi00ZTYyLWFiZGUtMTYwM2NlNjkyYTNj'>Open Form</a>";
-  }
-  else if (type === 'crm') {
-    message = "👉 CRM Support:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JACbs_8gmdwVQYuvISpXpOaKAT2opxmPGY_aUgxW66Ad8xI?nav=YWY4ZjRjZjYtYmM2Yy00NzZhLWI4NTMtODMyMmFkNzYyODRk'>Open Form</a>";
-  }
-  else if (type === 'onboarding') {
-    message = "👉 Employee Onboarding:<br><a href='https://millnest.sharepoint.com/:l:/s/Vijay_Testing/JABvlV452Ja1SqAt-HFBtInZAd3vRonVLNaYms8kaf5hNWI?nav=MWVjNmI4ZDYtOTFkMi00Mzg3LWExNjMtNzk3YzRjNjVmNGFk'>Open Form</a>";
-  }
+  showMainMenu();
+}
 
-  // Append instead of replace
-  res.innerHTML += "<div class='bot'>" + message + "</div>";
+// MAIN MENU
+function showMainMenu() {
+  document.getElementById("messages").innerHTML += `
+    <button class="option" onclick="raiseTicket()">Raise Ticket</button>
+    <button class="option" onclick="trackTicket()">Track Ticket</button>
+    <button class="option" onclick="contactIT()">Talk to IT Person</button>
+  `;
+}
+
+// RAISE TICKET OPTIONS
+function raiseTicket() {
+  addBot("Please select request type:");
+
+  document.getElementById("messages").innerHTML += `
+    <button class="option" onclick="openService()">Service Request</button>
+    <button class="option" onclick="openITIssue()"> IT Issue</button>
+    <button class="option" onclick="openAccess()">System Access</button>
+    <button class="option" onclick="openCRM()">CRM Support</button>
+    <button class="option" onclick="openOnboarding()">Onboarding</button>
+  `;
+}
+
+// FORM LINKS (REPLACE THESE)
+function openService() {
+  addBot("Opening Service Request Form...");
+  window.open("https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u");
+}
+
+function openITIssue() {
+  addBot("Opening IT Issue Form...");
+  window.open("https://forms.office.com/r/IT_ISSUE_FORM_LINK");
+}
+
+function openAccess() {
+  addBot("Opening System Access Form...");
+  window.open("https://forms.office.com/r/ACCESS_FORM_LINK");
+}
+
+function openCRM() {
+  addBot("Opening CRM Support Form...");
+  window.open("https://forms.office.com/r/CRM_FORM_LINK");
+}
+
+function openOnboarding() {
+  addBot("Opening Onboarding Form...");
+  window.open("https://forms.office.com/r/ONBOARDING_FORM_LINK");
+}
+
+// TRACK TICKET
+function trackTicket() {
+  addBot("You can track your ticket here:");
+  window.open("https://your-sharepoint-site-url"); // 🔁 Replace
+}
+
+// CONTACT IT
+function contactIT() {
+  addBot("Choose how you want to contact IT:");
+
+  document.getElementById("messages").innerHTML += `
+    <button class="option" onclick="openTeams()">💬 Chat in Teams</button>
+    <button class="option" onclick="sendEmail()">📧 Send Email</button>
+  `;
+}
+
+function openTeams() {
+  window.open("https://teams.microsoft.com");
+}
+
+function sendEmail() {
+  window.location.href = "mailto:it.support@millnest.com?subject=IT Support Required";
 }
 
 </script>
