@@ -4,10 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-/* General */
-body { font-family: Arial, sans-serif; }
-
-/* Chat Button */
+/* Floating Button */
 #chatBtn {
   position: fixed;
   bottom: 15px;
@@ -16,32 +13,63 @@ body { font-family: Arial, sans-serif; }
   color: white;
   border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 18px;
+  width: 55px;
+  height: 55px;
+  font-size: 20px;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* Chat Box */
+/* Chat Container */
 #chatBox {
   display: none;
   position: fixed;
-  bottom: 75px;
+  bottom: 80px;
   right: 15px;
-  width: 280px;
-  max-height: 350px;
-  overflow-y: auto;
+  width: 320px;
+  height: 420px;
   background: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Bot Text */
+/* Header */
+#chatHeader {
+  background: #0078D4;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Messages Area */
+#messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #f5f5f5;
+}
+
+/* Bot Bubble */
 .bot {
-  color: black;
+  background: #e1f0ff;
+  padding: 8px;
+  border-radius: 10px;
   margin: 5px 0;
-  font-size: 14px;
+  max-width: 80%;
+}
+
+/* User Bubble */
+.user {
+  background: #d1ffd6;
+  padding: 8px;
+  border-radius: 10px;
+  margin: 5px 0;
+  max-width: 80%;
+  margin-left: auto;
 }
 
 /* Buttons */
@@ -49,17 +77,25 @@ body { font-family: Arial, sans-serif; }
   display: block;
   width: 100%;
   margin: 5px 0;
-  padding: 6px;
+  padding: 8px;
   border: none;
   background: #0078D4;
   color: white;
-  border-radius: 5px;
-  font-size: 13px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
 .option:hover {
   background: #005ea6;
+}
+
+/* Input Box */
+.inputBox {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 5px;
 }
 
 </style>
@@ -70,6 +106,7 @@ body { font-family: Arial, sans-serif; }
 <button id="chatBtn" onclick="toggleChat()">💬</button>
 
 <div id="chatBox">
+  <div id="chatHeader">IT Help Desk</div>
   <div id="messages"></div>
 </div>
 
@@ -78,27 +115,38 @@ body { font-family: Arial, sans-serif; }
 // Toggle Chat
 function toggleChat() {
   let box = document.getElementById("chatBox");
-  box.style.display = box.style.display === "none" ? "block" : "none";
+  box.style.display = box.style.display === "none" ? "flex" : "none";
   startBot();
 }
 
-// Bot Message (with clear option)
-function addBot(msg, clear = false) {
-  if (clear) {
-    document.getElementById("messages").innerHTML = "";
-  }
-  document.getElementById("messages").innerHTML += "<div class='bot'>" + msg + "</div>";
+// Add Bot Message
+function addBot(msg, clear=false) {
+  if(clear) document.getElementById("messages").innerHTML="";
+  document.getElementById("messages").innerHTML += `<div class="bot">${msg}</div>`;
+  scrollDown();
+}
+
+// Add User Message
+function addUser(msg){
+  document.getElementById("messages").innerHTML += `<div class="user">${msg}</div>`;
+  scrollDown();
+}
+
+// Auto Scroll
+function scrollDown(){
+  let box = document.getElementById("messages");
+  box.scrollTop = box.scrollHeight;
 }
 
 // Start Bot
-function startBot() {
+function startBot(){
   addBot("Hello! Welcome to IT Help Desk", true);
   addBot("How can I help you?");
-  showMainMenu();
+  mainMenu();
 }
 
 // Main Menu
-function showMainMenu() {
+function mainMenu(){
   document.getElementById("messages").innerHTML += `
     <button class="option" onclick="raiseTicket()">Raise Ticket</button>
     <button class="option" onclick="trackTicket()">Track Ticket</button>
@@ -107,48 +155,53 @@ function showMainMenu() {
 }
 
 // Raise Ticket
-function raiseTicket() {
+function raiseTicket(){
   addBot("Select request type:", true);
 
   document.getElementById("messages").innerHTML += `
-    <button class="option" onclick="openService()">Service Request</button>
-    <button class="option" onclick="openITIssue()">IT Issue</button>
-    <button class="option" onclick="openAccess()">System Access</button>
-    <button class="option" onclick="openCRM()">CRM Support</button>
-    <button class="option" onclick="openOnboarding()">Onboarding</button>
+    <button class="option" onclick="openForm('Service')">Service Request</button>
+    <button class="option" onclick="openForm('IT Issue')">IT Issue</button>
+    <button class="option" onclick="openForm('Access')">System Access</button>
+    <button class="option" onclick="openForm('CRM')">CRM Support</button>
+    <button class="option" onclick="openForm('Onboarding')">Onboarding</button>
     <button class="option" onclick="startBot()">⬅ Back</button>
   `;
 }
 
-// Forms
-function openService() {
-  window.open("https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u");
+// Open Forms
+function openForm(type){
+  addUser(type);
+  
+  let links = {
+    "Service": "https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u",
+    "IT Issue": "https://forms.office.com/r/IT_ISSUE_FORM_LINK",
+    "Access": "https://forms.office.com/r/ACCESS_FORM_LINK",
+    "CRM": "https://forms.office.com/r/CRM_FORM_LINK",
+    "Onboarding": "https://forms.office.com/r/ONBOARDING_FORM_LINK"
+  };
+
+  window.open(links[type]);
 }
 
-function openITIssue() {
-  window.open("https://forms.office.com/r/IT_ISSUE_FORM_LINK");
+// Track Ticket (Input UI)
+function trackTicket(){
+  addBot("Enter your Ticket ID:", true);
+
+  document.getElementById("messages").innerHTML += `
+    <input id="ticket" class="inputBox" placeholder="HW-2026-001">
+    <button class="option" onclick="checkTicket()">Check Status</button>
+    <button class="option" onclick="startBot()">⬅ Back</button>
+  `;
 }
 
-function openAccess() {
-  window.open("https://forms.office.com/r/ACCESS_FORM_LINK");
-}
-
-function openCRM() {
-  window.open("https://forms.office.com/r/CRM_FORM_LINK");
-}
-
-function openOnboarding() {
-  window.open("https://forms.office.com/r/ONBOARDING_FORM_LINK");
-}
-
-// Track Ticket
-function trackTicket() {
-  addBot("Opening ticket page...", true);
-  window.open("https://millnest.sharepoint.com/sites/Vijay_Testing/Lists/Hardware%20micro/AllItems.aspx");
+function checkTicket(){
+  let id = document.getElementById("ticket").value;
+  addUser(id);
+  addBot("Status: In Progress (Demo)");
 }
 
 // Contact IT
-function contactIT() {
+function contactIT(){
   addBot("Contact IT:", true);
 
   document.getElementById("messages").innerHTML += `
@@ -158,12 +211,12 @@ function contactIT() {
   `;
 }
 
-function openTeams() {
+function openTeams(){
   window.open("https://teams.microsoft.com");
 }
 
-function sendEmail() {
-  window.location.href = "mailto:it.support@millnest.com";
+function sendEmail(){
+  window.location.href="mailto:it.support@millnest.com";
 }
 
 </script>
