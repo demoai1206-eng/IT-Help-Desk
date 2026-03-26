@@ -4,20 +4,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
+/* General */
 body { font-family: Arial, sans-serif; }
 
-/* Floating Button */
+/* Chat Button */
 #chatBtn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 15px;
+  right: 15px;
   background: #0078D4;
   color: white;
   border: none;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
   cursor: pointer;
 }
 
@@ -25,10 +26,10 @@ body { font-family: Arial, sans-serif; }
 #chatBox {
   display: none;
   position: fixed;
-  bottom: 90px;
-  right: 20px;
-  width: 320px;
-  max-height: 400px;
+  bottom: 75px;
+  right: 15px;
+  width: 280px;
+  max-height: 350px;
   overflow-y: auto;
   background: white;
   border: 1px solid #ccc;
@@ -36,20 +37,24 @@ body { font-family: Arial, sans-serif; }
   padding: 10px;
 }
 
-/* Messages */
-.bot { color: #0078D4; margin: 5px 0; }
-.user { color: green; text-align: right; }
+/* Bot Text */
+.bot {
+  color: black;
+  margin: 5px 0;
+  font-size: 14px;
+}
 
 /* Buttons */
 .option {
   display: block;
   width: 100%;
   margin: 5px 0;
-  padding: 8px;
+  padding: 6px;
   border: none;
   background: #0078D4;
   color: white;
   border-radius: 5px;
+  font-size: 13px;
   cursor: pointer;
 }
 
@@ -62,10 +67,8 @@ body { font-family: Arial, sans-serif; }
 
 <body>
 
-<!-- Chat Button -->
 <button id="chatBtn" onclick="toggleChat()">💬</button>
 
-<!-- Chat Window -->
 <div id="chatBox">
   <div id="messages"></div>
 </div>
@@ -79,82 +82,79 @@ function toggleChat() {
   startBot();
 }
 
-// Bot Message
-function addBot(msg) {
+// Bot Message (with clear option)
+function addBot(msg, clear = false) {
+  if (clear) {
+    document.getElementById("messages").innerHTML = "";
+  }
   document.getElementById("messages").innerHTML += "<div class='bot'>" + msg + "</div>";
 }
 
 // Start Bot
 function startBot() {
-  document.getElementById("messages").innerHTML = "";
-  
-  addBot("👋 Hello! Welcome to IT Help Desk");
+  addBot("Hello! Welcome to IT Help Desk", true);
   addBot("How can I help you?");
-
   showMainMenu();
 }
 
-// MAIN MENU
+// Main Menu
 function showMainMenu() {
   document.getElementById("messages").innerHTML += `
     <button class="option" onclick="raiseTicket()">Raise Ticket</button>
     <button class="option" onclick="trackTicket()">Track Ticket</button>
-    <button class="option" onclick="contactIT()">Talk to IT Person</button>
+    <button class="option" onclick="contactIT()">Talk to IT</button>
   `;
 }
 
-// RAISE TICKET OPTIONS
+// Raise Ticket
 function raiseTicket() {
-  addBot("Please select request type:");
+  addBot("Select request type:", true);
 
   document.getElementById("messages").innerHTML += `
     <button class="option" onclick="openService()">Service Request</button>
-    <button class="option" onclick="openITIssue()"> IT Issue</button>
+    <button class="option" onclick="openITIssue()">IT Issue</button>
     <button class="option" onclick="openAccess()">System Access</button>
     <button class="option" onclick="openCRM()">CRM Support</button>
     <button class="option" onclick="openOnboarding()">Onboarding</button>
+    <button class="option" onclick="startBot()">⬅ Back</button>
   `;
 }
 
-// FORM LINKS (REPLACE THESE)
+// Forms
 function openService() {
-  addBot("Opening Service Request Form...");
   window.open("https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u");
 }
 
 function openITIssue() {
-  addBot("Opening IT Issue Form...");
   window.open("https://forms.office.com/r/IT_ISSUE_FORM_LINK");
 }
 
 function openAccess() {
-  addBot("Opening System Access Form...");
   window.open("https://forms.office.com/r/ACCESS_FORM_LINK");
 }
 
 function openCRM() {
-  addBot("Opening CRM Support Form...");
   window.open("https://forms.office.com/r/CRM_FORM_LINK");
 }
 
 function openOnboarding() {
-  addBot("Opening Onboarding Form...");
   window.open("https://forms.office.com/r/ONBOARDING_FORM_LINK");
 }
 
-// TRACK TICKET
+// Track Ticket
 function trackTicket() {
-  addBot("You can track your ticket here:");
-  window.open("https://your-sharepoint-site-url"); // 🔁 Replace
+  addBot("Opening ticket page...", true);
+  window.open("https://millnest.sharepoint.com/sites/Vijay_Testing/Lists/Hardware%20micro/AllItems.aspx");
 }
 
-// CONTACT IT
+// Contact IT
 function contactIT() {
-  addBot("Choose how you want to contact IT:");
+  addBot("Contact IT:", true);
 
   document.getElementById("messages").innerHTML += `
-    <button class="option" onclick="openTeams()">💬 Chat in Teams</button>
-    <button class="option" onclick="sendEmail()">📧 Send Email</button>
+    <button class="option" onclick="openTeams()">Teams Chat</button>
+    <button class="option" onclick="sendEmail()">Send Email</button>
+    <button class="option" onclick="startBot()">⬅ Back</button>
   `;
 }
 
@@ -163,7 +163,7 @@ function openTeams() {
 }
 
 function sendEmail() {
-  window.location.href = "mailto:it.support@millnest.com?subject=IT Support Required";
+  window.location.href = "mailto:it.support@millnest.com";
 }
 
 </script>
