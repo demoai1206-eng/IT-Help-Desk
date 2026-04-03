@@ -159,15 +159,15 @@ function raiseTicket(){
   addBot("Select request type:", true);
 
   document.getElementById("messages").innerHTML += `
-<button class="option" onclick="openForm('IT Service Request Form')">IT Service Request Form</button>
-<button class="option" onclick="openForm('New Hardware Request Form')">New Hardware Request Form</button>
+<button class="option" onclick="openForm('IT Service Request')">IT Service Request</button>
+<button class="option" onclick="openForm('New Hardware Request')">New Hardware Request</button>
 <button class="option" onclick="openForm('Remote Work Access Request')">Remote Work Access Request</button>
-<button class="option" onclick="openForm('Mobile Access Request Form')">Mobile Access Request Form</button>
-<button class="option" onclick="openForm('Zoho-One CRM Support Request Form')">Zoho-One CRM Support Request Form</button>
-<button class="option" onclick="openForm('New User Request Form')">New User Request Form</button>
-<button class="option" onclick="openForm('Training Request Form')">Training Request Form</button>
-<button class="option" onclick="openForm('Asset Declaration Form')">Asset Declaration Form</button>
-<button class="option" onclick="openForm('Data Request Form')">Data Request Form</button>
+<button class="option" onclick="openForm('Mobile Access Request')">Mobile Access Request</button>
+<button class="option" onclick="openForm('Zoho-One CRM Support Request')">Zoho-One CRM Support Request</button>
+<button class="option" onclick="openForm('New User Request')">New User Request</button>
+<button class="option" onclick="openForm('Training Request')">Training Request</button>
+<button class="option" onclick="openForm('Asset Declaration')">Asset Declaration</button>
+<button class="option" onclick="openForm('Data Request')">Data Request</button>
 <button class="option" onclick="openForm('IT Satisfaction Survey')">IT Satisfaction Survey</button>
 <button class="option" onclick="startBot()">⬅ Back</button>
   `;
@@ -178,23 +178,23 @@ function openForm(type){
   addUser(type);
   
 let links = {
-  "IT Service Request Form": "https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u",
+  "IT Service Request": "https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u",
   
-  "New Hardware Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNzI0MUZGVEs1TkhMVUs1NUhBSkUxT0ZTSC4u",
+  "New Hardware Request": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNzI0MUZGVEs1TkhMVUs1NUhBSkUxT0ZTSC4u",
   
   "Remote Work Access Request": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQkxLQU0zS0s4STBOTEUxSkZKWDQzR0I1RC4u",
   
-  "Mobile Access Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQ0tTUkJTMVo1V1ZZRjlQU1VMUEpXUkM4SC4u",
+  "Mobile Access Request": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQ0tTUkJTMVo1V1ZZRjlQU1VMUEpXUkM4SC4u",
   
-  "Zoho-One CRM Support Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQkxEUjJLWUVKRjc4UEEyMEFHWkZLUDExSC4u",
+  "Zoho-One CRM Support Request": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQkxEUjJLWUVKRjc4UEEyMEFHWkZLUDExSC4u",
   
-  "New User Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNE1FQVU3OFZaVUxOSU4xQTZWWEVBMFBPWS4u",
+  "New User Request": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNE1FQVU3OFZaVUxOSU4xQTZWWEVBMFBPWS4u",
   
-  "Training Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNDlST1AyWVVLOFEwODhERUtUR1pWODdPOC4u",
+  "Training Request": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNDlST1AyWVVLOFEwODhERUtUR1pWODdPOC4u",
   
-  "Asset Declaration Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQ1YyUU05UThaSTBSOEFORzMySlczVDBUNy4u",
+  "Asset Declaration": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQ1YyUU05UThaSTBSOEFORzMySlczVDBUNy4u",
   
-  "Data Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111URTc1NTBNMzNDOUlaUENHQk9UN1dKR0MwVS4u",
+  "Data Request": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111URTc1NTBNMzNDOUlaUENHQk9UN1dKR0MwVS4u",
   
   "IT Satisfaction Survey": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQUoxQjRCVVFLSU1JN1NaRk5FUFZGWFU3TC4u",
   
