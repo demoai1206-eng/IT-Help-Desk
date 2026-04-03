@@ -217,7 +217,7 @@ function trackTicket(){
 function checkTicket(){
   let id = document.getElementById("ticket").value;
   addUser(id);
-  addBot("Status: In Progress (Demo)");
+  addBot("Status: In Progress");
 }
 
 // Contact IT
@@ -235,8 +235,8 @@ function openTeams(){
   window.open("https://teams.microsoft.com");
 }
 
-function sendEmail(){
-  window.location.href="mailto:it.support@millnest.com";
+function sendEmail() {
+  window.location.href = "mailto:it.support@millnest.com?subject=IT Support Request";
 }
 
 </script>
