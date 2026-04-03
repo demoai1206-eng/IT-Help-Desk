@@ -159,11 +159,16 @@ function raiseTicket(){
   addBot("Select request type:", true);
 
   document.getElementById("messages").innerHTML += `
-    <button class="option" onclick="openForm('Service')">Service Request</button>
-    <button class="option" onclick="openForm('IT Issue')">IT Issue</button>
-    <button class="option" onclick="openForm('Remote Work Access')">Remote Work Access & Authorization Request</button>
-    <button class="option" onclick="openForm('CRM')">CRM Support</button>
-    <button class="option" onclick="openForm('Onboarding')">Onboarding</button>
+    <button class="option" onclick="openForm('IT Service Request Form')">IT Service Request Form</button>
+    <button class="option" onclick="openForm('New Hardware Request Form')">New Hardware Request Form</button>
+    <button class="option" onclick="openForm('Remote Work Access Request')">Remote Work Access Request</button>
+    <button class="option" onclick="openForm('Mobile Access Request Form')">Mobile Access Request Form</button>
+    <button class="option" onclick="openForm('Zoho-One CRM Support Request')">Zoho-One CRM Support Request Form</button>
+    <button class="option" onclick="openForm('New User Request Form')">New User Request Form</button>
+    <button class="option" onclick="openForm('Training Request Form')">Training Request Form</button>
+    <button class="option" onclick="openForm('Asset Declaration Form')">Asset Declaration Form</button>
+    <button class="option" onclick="openForm('Data Request Form')">Data Request Form</button>
+    <button class="option" onclick="openForm('IT Satisfaction Survey')">IT Satisfaction Survey</button
     <button class="option" onclick="startBot()">⬅ Back</button>
   `;
 }
@@ -172,13 +177,28 @@ function raiseTicket(){
 function openForm(type){
   addUser(type);
   
-  let links = {
-    "Service": "https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u",
-    "IT Issue": "https://forms.office.com/r/IT_ISSUE_FORM_LINK",
-    "Remote Work Access & Authorization Request": "https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQkxLQU0zS0s4STBOTEUxSkZKWDQzR0I1RC4u",
-    "CRM": "https://forms.office.com/r/CRM_FORM_LINK",
-    "Onboarding": "https://forms.office.com/r/ONBOARDING_FORM_LINK"
-  };
+let links = {
+  "IT Service Request Form": "https://forms.office.com/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UOTZUQTEzVzlFU1ZKS0daRUpNOTYwQUxQVy4u",
+  
+  "New Hardware Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNzI0MUZGVEs1TkhMVUs1NUhBSkUxT0ZTSC4u",
+  
+  "Remote Work Access Request": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQkxLQU0zS0s4STBOTEUxSkZKWDQzR0I1RC4u",
+  
+  "Mobile Access Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQ0tTUkJTMVo1V1ZZRjlQU1VMUEpXUkM4SC4u",
+  
+  "Zoho-One CRM Support Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQkxEUjJLWUVKRjc4UEEyMEFHWkZLUDExSC4u",
+  
+  "New User Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNE1FQVU3OFZaVUxOSU4xQTZWWEVBMFBPWS4u",
+  
+  "Training Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UNDlST1AyWVVLOFEwODhERUtUR1pWODdPOC4u",
+  
+  "Asset Declaration Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQ1YyUU05UThaSTBSOEFORzMySlczVDBUNy4u",
+  
+  "Data Request Form": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111URTc1NTBNMzNDOUlaUENHQk9UN1dKR0MwVS4u",
+  
+  "IT Satisfaction Survey": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=paqN7sJIgUahza9uyO1zwtC1tAPUwFBDghay99JW111UQUoxQjRCVVFLSU1JN1NaRk5FUFZGWFU3TC4u",
+  
+};
 
   window.open(links[type]);
 }
