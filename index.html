@@ -226,17 +226,12 @@ function contactIT(){
 
   document.getElementById("messages").innerHTML += `
     <button class="option" onclick="openTeams()">Teams Chat</button>
-    <button class="option" onclick="sendEmail()">Send Email</button>
     <button class="option" onclick="startBot()">⬅ Back</button>
   `;
 }
 
 function openTeams(){
   window.open("https://teams.microsoft.com");
-}
-
-function sendEmail() {
-  window.location.href = "mailto:it.support@millnest.com?subject=IT Support Request";
 }
 
 </script>
