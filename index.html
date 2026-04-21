@@ -233,8 +233,14 @@ function contactIT(){
 function openTeams(){
   window.open("https://teams.microsoft.com/l/chat/0/0?users=it.support@millnest.com");
 }
-function openOutlook(){
-  window.open("https://outlook.office.com/mail/");
+function openOutlook() {
+  const to = "it.support@millnest.com";
+  const subject = "IT Support Request";
+  const body = "Please describe your issue here:";
+
+  const url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(to)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  window.open(url, "_blank");
 }
 </script>
 
